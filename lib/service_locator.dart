@@ -1,24 +1,18 @@
-import 'package:clean_test/features/data/repository/user_repo_impl.dart';
-import 'package:clean_test/features/domain/repository/user_repo.dart';
-import 'package:get_it/get_it.dart';
-import 'package:clean_test/features/data/datasource/user_remote.dart';
-import 'package:clean_test/features/domain/usecases/get_user.dart';
+import 'package:clean_test/features/data/datasource/get_user_remote.dart';
+import 'package:clean_test/features/data/repository/get_user_repo_impl.dart';
+import 'package:clean_test/features/domain/repository/get_user_repo.dart';
+import 'package:clean_test/features/domain/usecases/get_user_usecase.dart';
 import 'package:clean_test/features/presentation/bloc/user_bloc.dart';
+import 'package:get_it/get_it.dart';
 
-final sl = GetIt.instance;
+GetIt sl = GetIt.instance;
 
 void init() {
-  // Data source
-  sl.registerLazySingleton<UsersRemoteDataSource>(
-    () => UsersRemoteDataSourceImpl(),
-  );
+  sl.registerSingleton<GetUserRemoteDatasource>(GetUserRemoteDatasourceImpl());
 
-  // Repository
-  sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl()));
+  sl.registerSingleton<GetUserRepository>(GetUserRepositoryImpl(sl()));
 
-  // Use cases
-  sl.registerLazySingleton(() => GetUsersUseCase(sl()));
+  sl.registerSingleton<GetUserUsecase>(GetUserUsecase(sl()));
 
-  // Bloc
-  sl.registerFactory(() => UsersBloc(sl()));
+  sl.registerSingleton<UserBloc>(UserBloc(sl()));
 }
