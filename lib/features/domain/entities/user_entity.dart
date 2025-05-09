@@ -6,13 +6,8 @@ class UserEntity extends Equatable {
   final String? lastName;
   final int? age;
 
-  const UserEntity({
-    this.id,
-    this.firstName,
-    this.lastName,
-    this.age,
-  });
+  const UserEntity({this.id, this.firstName, this.lastName, this.age});
 
   @override
-  List <Object?> get props => [id, firstName, lastName, age];
+  List<Object?> get props => [id, firstName, lastName, age];
 }
